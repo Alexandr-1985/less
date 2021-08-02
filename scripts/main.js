@@ -1,10 +1,21 @@
-let money = 100;
-let income = true;
-let addExpenses = 15;
-let deposit = 1000;
-let mission = 'any';
-let period = 12;
+//1 value assignment
+let money = 55000;
+let income = 'frilance';
+let addExpenses = 'Internet, Taxy, Communal payment';
+let deposit = true;
+let mission = 1000000;
+let period = 6;
 
-alert('any text');
+//metods and properties
 
-console.log('mission');
+console.log(typeof money, typeof income, typeof deposit);
+console.log(addExpenses.length);
+console.log(
+    'Period is equal ' + period + ' month.',
+    'Goal to earn ' + mission + ' euro!'
+);
+console.log(addExpenses.toLocaleLowerCase().split(' '));
+
+let budgetDay = (money /= 30);
+console.log(Math.round(budgetDay));
+//console.log(budgetDay.toFixed());
