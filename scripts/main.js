@@ -9,12 +9,15 @@ let deposit = true;
 let mission = 1000000;
 let period = 6;
 let budgetDay;
-let costs;
+let expenses1;
+let expenses2;
+let amount1;
+let amount2;
 let budgetMonth;
-let internet = 30000;
-let taxy = 15000;
-let communalPayment = 40000;
-let credit = 21000;
+let internet;
+let taxy;
+let communalPayment;
+let credit;
 
 //metods and properties
 
@@ -42,23 +45,27 @@ addExpenses = prompt(
 console.log(addExpenses);
 console.log(addExpenses.split(' '));
 
-deposit = console.log(Boolean(prompt('Есть ли у вас депозит в банке')));
+deposit = console.log(confirm('Есть ли у вас депозит в банке?'));
 
-costs = prompt('Есть ли у вас депозит в банке', 'expenses1');
-console.log(costs);
-costs = prompt('Есть ли у вас депозит в банке', 'expenses2');
-console.log(costs);
-
-costs = console.log(prompt('Во сколько это обойдется', 'amount1'));
-costs = console.log(prompt('Во сколько это обойдется', 'amount2'));
+expenses1 = prompt('Введите обязательную статью расходов?', ' ');
+amount1 = prompt('Во сколько это обойдется?', ' ');
+expenses2 = prompt('Введите обязательную статью расходов?', ' ');
+amount2 = prompt('Во сколько это обойдется?', ' ');
 
 //бюджет на месяц
-budgetMonth = money - internet - taxy - communalPayment - credit;
+budgetMonth =
+    prompt('месячный доход', money) -
+    prompt('Internet', internet) -
+    prompt('taxy', taxy) -
+    prompt('communal Payment', communalPayment) -
+    prompt('credit', credit) -
+    prompt('обязательную статью расходов', amount1) -
+    prompt('обязательную статью расходов', amount2);
 console.log('Бюджет на месяц:', budgetMonth);
 
 //за сколько месяцев можно будет собрать mission
 mission = console.log(
-    'Цель бцдет достигнута за' + Math.round(mission / budgetMonth) + 'месяцев'
+    'Цель будет достигнута за ' + Math.round(mission / budgetMonth) + ' месяцев'
 );
 
 //budgetMonth учитывая бюджет на месяц
@@ -83,24 +90,3 @@ if (budgetDay > 1200) {
 } else {
     console.log('Иди к начальнику проси повышения');
 }
-
-//тернарный
-console.log(
-    isNaN(budgetDay) ?
-    'Вероятно ошибка' :
-    budgetDay < 0 ?
-    'Что то пошло не так' :
-    budgetDay < 600 ?
-    'Надо стараться лучше!' :
-    budgetDay < 1200 ?
-    'Уже лучше' :
-    budgetDay > 1200 ?
-    'У вас высокий уровень дохода' :
-    budgetDay === 0 ?
-    'Меняй работу' :
-    budgetDay === 600 ?
-    'Надо стараться' :
-    budgetDay === 1200 ?
-    'You are good!' :
-    'Или просто не везет'
-);
