@@ -6,7 +6,7 @@ let money = 190000;
 let income = 'frilance';
 let addExpenses = 'Internet, Taxy, Communal payment, Credit';
 let deposit = true;
-let mission = 1000000;
+let mission = 100000;
 let period = 6;
 let budgetDay;
 let expenses1;
@@ -35,7 +35,7 @@ console.log(Math.round(budgetDay));
 
 /////////////////////////////////////////////////////////////////////////////////
 //question about salary
-money = prompt('Ваш месячный доход?', ' ');
+money = +prompt('Ваш месячный доход?', ' ');
 console.log(money);
 
 addExpenses = prompt(
@@ -48,20 +48,13 @@ console.log(addExpenses.split(' '));
 deposit = console.log(confirm('Есть ли у вас депозит в банке?'));
 
 expenses1 = prompt('Введите обязательную статью расходов?', ' ');
-amount1 = prompt('Во сколько это обойдется?', ' ');
-expenses2 = prompt('Введите обязательную статью расходов?', ' ');
-amount2 = prompt('Во сколько это обойдется?', ' ');
+amount1 = +prompt('Во сколько это обойдется?');
+expenses2 = +prompt('Введите обязательную статью расходов?', ' ');
+amount2 = prompt('Во сколько это обойдется?');
 
 //бюджет на месяц
-budgetMonth =
-    prompt('месячный доход', money) -
-    prompt('Internet', internet) -
-    prompt('taxy', taxy) -
-    prompt('communal Payment', communalPayment) -
-    prompt('credit', credit) -
-    prompt('обязательную статью расходов', amount1) -
-    prompt('обязательную статью расходов', amount2);
-console.log('Бюджет на месяц:', budgetMonth);
+budgetMonth = money - (amount1 + amount2);
+console.log('Бюджет на месяц: ', budgetMonth);
 
 //за сколько месяцев можно будет собрать mission
 mission = console.log(
@@ -70,7 +63,7 @@ mission = console.log(
 
 //budgetMonth учитывая бюджет на месяц
 budgetDay = budgetMonth /= 30;
-console.log('Бюджет на день:', Math.round(-budgetDay));
+console.log('Бюджет на день: ' + Math.floor(budgetDay) + ' рублей');
 
 //Конструктор условий
 if (budgetDay > 1200) {
