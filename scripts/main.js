@@ -3,11 +3,11 @@
 /////////////////////////////////////////////////////////////////////////
 //1 value assignment
 let money,
-    income,
+    income = 'Full Stack',
     addExpenses,
     deposit,
     mission = 1000000,
-    period,
+    period = 3,
     budgetDay,
     expenses1,
     expenses2,
@@ -27,7 +27,7 @@ addExpenses = prompt(
 //console.log(addExpenses);
 //console.log(addExpenses.split(' '));
 
-deposit = console.log(confirm('Есть ли у вас депозит в банке?'));
+deposit = confirm('Есть ли у вас депозит в банке?');
 
 expenses1 = prompt('Введите обязательную статью расходов?', ' ');
 amount1 = +prompt('Во сколько это обойдется?', ' ');
@@ -74,7 +74,7 @@ console.log(typeof money, typeof income, typeof deposit);
 console.log(addExpenses.length);
 console.log(
     'Period is equal ' + period + ' month.',
-    'Goal to earn ' + mission + ' euro!'
+    `Goal to earn ${mission} euro!`
 );
 console.log(addExpenses.toLocaleLowerCase().split(' '));
 console.log(Math.floor(budgetDay));
