@@ -2,55 +2,37 @@
 
 /////////////////////////////////////////////////////////////////////////
 //1 value assignment
-let money = 190000;
-let income = 'frilance';
-let addExpenses = 'Internet, Taxy, Communal payment, Credit';
-let deposit = true;
-let mission = 100000;
-let period = 6;
-let budgetDay;
-let expenses1;
-let expenses2;
-let amount1;
-let amount2;
-let budgetMonth;
-let internet;
-let taxy;
-let communalPayment;
-let credit;
-
-//metods and properties
-
-console.log(typeof money, typeof income, typeof deposit);
-console.log(addExpenses.length);
-console.log(
-    'Period is equal ' + period + ' month.',
-    'Goal to earn ' + mission + ' euro!'
-);
-console.log(addExpenses.toLocaleLowerCase().split(' '));
-
-budgetDay = money /= 30;
-console.log(Math.round(budgetDay));
-//console.log(budgetDay.toFixed());
+let money,
+    income,
+    addExpenses,
+    deposit,
+    mission,
+    period,
+    budgetDay,
+    expenses1,
+    expenses2,
+    amount1,
+    amount2,
+    budgetMonth;
 
 /////////////////////////////////////////////////////////////////////////////////
 //question about salary
 money = +prompt('Ваш месячный доход?', ' ');
-console.log(money);
+//console.log(money);
 
 addExpenses = prompt(
     'Перечислите возможные расходы за рассчитываемый период через запятую',
     'Internet, Taxy, Communal payment, Credit'
 );
-console.log(addExpenses);
-console.log(addExpenses.split(' '));
+//console.log(addExpenses);
+//console.log(addExpenses.split(' '));
 
 deposit = console.log(confirm('Есть ли у вас депозит в банке?'));
 
 expenses1 = prompt('Введите обязательную статью расходов?', ' ');
-amount1 = +prompt('Во сколько это обойдется?');
-expenses2 = +prompt('Введите обязательную статью расходов?', ' ');
-amount2 = prompt('Во сколько это обойдется?');
+amount1 = +prompt('Во сколько это обойдется?', ' ');
+expenses2 = prompt('Введите обязательную статью расходов?', ' ');
+amount2 = +prompt('Во сколько это обойдется?', ' ');
 
 //бюджет на месяц
 budgetMonth = money - (amount1 + amount2);
@@ -62,7 +44,7 @@ mission = console.log(
 );
 
 //budgetMonth учитывая бюджет на месяц
-budgetDay = budgetMonth /= 30;
+budgetDay = budgetMonth / 30;
 console.log('Бюджет на день: ' + Math.floor(budgetDay) + ' рублей');
 
 //Конструктор условий
@@ -83,3 +65,16 @@ if (budgetDay > 1200) {
 } else {
     console.log('Иди к начальнику проси повышения');
 }
+
+////////////////////////////////////////////////////////
+
+//metods and properties
+
+console.log(typeof money, typeof income, typeof deposit);
+console.log(addExpenses.length);
+console.log(
+    'Period is equal ' + period + ' month.',
+    'Goal to earn ' + mission + ' euro!'
+);
+console.log(addExpenses.toLocaleLowerCase().split(' '));
+console.log(Math.floor(budgetDay));
