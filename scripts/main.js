@@ -74,7 +74,7 @@ console.log(typeof money, typeof income, typeof deposit);
 console.log(addExpenses.length);
 console.log(
     'Period is equal ' + period + ' month.',
-    'Goal to earn ' + mission + ' euro!'
+    `Goal to earn ${mission} euro!`
 );
 console.log(addExpenses.toLocaleLowerCase().split(' '));
 console.log(Math.floor(budgetDay));
