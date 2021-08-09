@@ -18,18 +18,6 @@ let money,
     budgetMonth;
 
 /////////////////////////////////////////////////////////////////////////////////
-
-// возможные расходы
-addExpenses = prompt(
-    'Перечислите возможные расходы за рассчитываемый период через запятую',
-    'Internet, Taxy, Communal payment, Credit'
-);
-
-deposit = confirm('Есть ли у вас депозит в банке?');
-
-//Вывод ввиде массива
-console.log(addExpenses.toLocaleLowerCase().split(', '));
-
 //question about salary
 //проверка вхоящийх данных
 let start = function() {
@@ -38,6 +26,16 @@ let start = function() {
     } while (!isNumber(money));
 };
 start();
+
+deposit = confirm('Есть ли у вас депозит в банке?');
+
+// возможные расходы
+addExpenses = prompt(
+    'Перечислите возможные расходы за рассчитываемый период через запятую',
+    'Internet, Taxy, Communal payment, Credit'
+);
+//Вывод ввиде массива
+console.log(addExpenses.toLocaleLowerCase().split(', '));
 
 //metods and properties
 let showTypeOf = (data) => {
@@ -56,7 +54,7 @@ let getExpensesMonth = function() {
         expenses[i] = prompt('Введите обязательную статью расходов?', ' ');
         let amount;
         do {
-            amount = +prompt('Во сколько это обойдется?', ' ');
+            amount = prompt('Во сколько это обойдется?', ' ');
         } while (!isNumber(amount));
         sum += amount;
     }
