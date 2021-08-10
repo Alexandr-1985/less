@@ -22,7 +22,7 @@ let money,
 //проверка вхоящийх данных
 let start = function() {
     do {
-        money = +prompt('Ваш месячный доход?');
+        money = prompt('Ваш месячный доход?');
     } while (!isNumber(money));
 };
 start();
