@@ -26,6 +26,7 @@ let appData = {
     deposite: false,
     mission: 100000,
     period: 3,
+    sum: 0,
 
     budget: money,
     budgetDay: 0,
@@ -47,7 +48,7 @@ let appData = {
             );
 
             do {
-                appData.amount = prompt('Во сколько это обойдется?', ' ');
+                appData.amount = prompt('Во сколько это обойдется? ', ' ');
             } while (!isNumber(appData.amount));
             appData.sum += appData.amount;
         }
@@ -56,7 +57,7 @@ let appData = {
     getExpensesMonth: function() {
         for (let elem in appData.expenses) {
             appData.getExpensesMonth += appData.expenses[elem];
-            console.log('key: ' + elem + 'value: ' + appData.expenses[elem]);
+            console.log('key: ' + elem + ' value: ' + appData.expenses[elem]);
         }
         console.log('Обязатеьные расходы за месяц:', appData.expensesMonth);
     },
@@ -131,7 +132,7 @@ console.log('Status: ', appData.getStatusIncome(appData.budgetDay));
 /////////////////////////////////////////////////
 console.log('Наша программа включает в себя данные: ');
 for (let elem in appData) {
-    console.log(elem, appData[elem]);
+    console.log('Свойства ' + elem, ' Значение: ' + appData[elem]);
 }
 ////////////////////////////////////////////////////////
 /* 
