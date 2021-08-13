@@ -52,8 +52,9 @@ let appData = {
             appData.sum += appData.amount;
         }
     },
-    //Объявить ф-ю всех обязательных расходов
+
     getExpensesMonth: function() {
+        //Объявить ф-ю всех обязательных расходов
         for (let elem in appData.expenses) {
             appData.getExpensesMonth += appData.expenses[elem];
             console.log('key: ' + elem + 'value: ' + appData.expenses[elem]);
@@ -99,8 +100,9 @@ let appData = {
 /////////////////////////////////////////////////////////////////////////////////
 appData.asking();
 appData.getExpensesMonth();
-appData.getAccumulatedMonth();
-appData.getTargetMonth();
+//appData.getAccumulatedMonth();
+//appData.getTargetMonth();
+//appData.getStatusIncome();
 
 //Объявить ф-ю которая возвращает накопления за месяцев
 console.log('Накопления за месяц: ', appData.getAccumulatedMonth(money));
@@ -128,18 +130,13 @@ console.log('Бюджет на день: ' + Math.floor(appData.budgetDay) + ' �
 appData.getStatusIncome(appData.budgetDay);
 console.log('Status: ', appData.getStatusIncome(appData.budgetDay));
 
-/////////////////////////////////////////////////
-console.log('Наша программа включает в себя данные: ');
-for (let elem in appData) {
-    console.log(elem, appData[elem]);
-}
 ////////////////////////////////////////////////////////
-/* 
+
 console.log(appData.addExpenses.length);
 
 console.log(
     'Period is equal ' + appData.period + ' month. ',
     `Goal to earn ${appData.mission} euro!`
 );
- */
+
 /////////////////////////////////////////
