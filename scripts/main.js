@@ -41,16 +41,14 @@ let appData = {
         );
         appData.addExpenses = addExpenses.toLocaleLowerCase().split(', ');
         appData.deposit = confirm('Есть ли у вас депозит в банке?');
-        for (let i = 0; i < 2; i++) {
-            appData.expenses[i] = prompt(
-                'Введите обязательную статью расходов?',
-                ' '
-            );
 
+        for (let i = 0; i < 2; i++) {
+            let question = prompt('Введите обязательную статью расходов?', ' '); //appData.expenses[i]
+            let cash;
             do {
-                appData.amount = prompt('Во сколько это обойдется? ', ' ');
-            } while (!isNumber(appData.amount));
-            appData.sum += appData.amount;
+                cash = prompt('Во сколько это обойдется? ', ' ');
+            } while (!isNumber(cash) || cash < 0);
+            cash = appData.expenses[question];
         }
     },
     //Объявить ф-ю всех обязательных расходов
