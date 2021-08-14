@@ -26,7 +26,6 @@ let appData = {
     deposite: false,
     mission: 100000,
     period: 3,
-    sum: 0,
 
     budget: money,
     budgetDay: 0,
