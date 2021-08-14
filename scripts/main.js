@@ -6,61 +6,6 @@ let isNumber = function(n) {
 };
 //while(isNaN(amount) || amount === '' || question === null)
 /////////////////////////////////////////////////////////////////////////
-<<<<<<< HEAD
-//1 value assignment
-let money,
-    income = 'Full Stack',
-    addExpenses,
-    deposit,
-    mission = 1000000,
-    period = 3,
-    budgetDay,
-    budgetMonth;
-
-/////////////////////////////////////////////////////////////////////////////////
-//question about salary
-//проверка вхоящийх данных
-let start = function() {
-    do {
-        money = prompt('Ваш месячный доход?');
-    } while (!isNumber(money));
-};
-start();
-
-deposit = confirm('Есть ли у вас депозит в банке?');
-
-// возможные расходы
-addExpenses = prompt(
-    'Перечислите возможные расходы за рассчитываемый период через запятую',
-    'Internet, Taxy, Communal payment, Credit'
-);
-//Вывод ввиде массива
-console.log(addExpenses.toLocaleLowerCase().split(', '));
-
-//metods and properties
-let showTypeOf = (data) => {
-    console.log(data, typeof data);
-};
-showTypeOf(money);
-showTypeOf(income);
-showTypeOf(deposit);
-
-let expenses = [];
-
-//Объявить ф-ю всех обязательных расходов
-let getExpensesMonth = function() {
-    let sum = 0;
-    for (let i = 0; i < 2; i++) {
-        expenses[i] = prompt('Введите обязательную статью расходов?', ' ');
-        let amount;
-        do {
-            amount = prompt('Во сколько это обойдется?', ' ');
-        } while (!isNumber(amount));
-        sum += amount;
-    }
-    console.log(expenses);
-    return sum;
-=======
 let money;
 
 //question about salary
@@ -147,7 +92,6 @@ let appData = {
             return 'Иди к начальнику проси повышения';
         }
     },
->>>>>>> lesson07
 };
 
 /////////////////////////////////////////////////////////////////////////////////
