@@ -81,12 +81,6 @@ let appData = {
             return 'Уровень дохода ниже среднего';
         } else if (appData.budgetDay < 0) {
             return 'Что то пошло не так';
-        } else if (appData.budgetDay === 1200) {
-            return 'You are good!';
-        } else if (appData.budgetDay === 600) {
-            return 'Надо стараться';
-        } else if (appData.budgetDay === 0) {
-            return 'Меняй работу';
         } else {
             return 'Иди к начальнику проси повышения';
         }
@@ -116,7 +110,7 @@ console.log('Обязательные расходы за месяц:', appData.
 console.log('Бюджет на день: ' + Math.floor(appData.budgetDay) + ' рублей');
 
 //Конструктор условий
-appData.getStatusIncome(appData.budgetDay);
+//appData.getStatusIncome(appData.budgetDay);
 console.log('Status: ', appData.getStatusIncome());
 
 console.log('Наша программа включает в себя данные: ');
