@@ -91,9 +91,6 @@ appData.asking();
 appData.getExpensesMonth();
 appData.getBudget();
 
-//Объявить ф-ю которая возвращает накопления за месяцев
-console.log('Накопления за месяц: ', appData.budgetMonth);
-
 //Обьявить функцию getTargetMonth. Подсчитать за какой период будет достигнута цель, зная результат месячного накопления accumulatedMonth и возвращает результат.
 appData.targetMonth = appData.getTargetMonth(
     appData.mission,
@@ -105,13 +102,8 @@ appData.targetMonth >= 0 ?
     console.log(
         `Срок достижения цели не будет достигнут за: ${appData.targetMonth} месяцев`
     );
-
-console.log('Обязательные расходы за месяц:', appData.expensesMonth);
-console.log('Бюджет на день: ' + Math.floor(appData.budgetDay) + ' рублей');
-
-//Конструктор условий
-//appData.getStatusIncome(appData.budgetDay);
 console.log('Status: ', appData.getStatusIncome());
+console.log('Бюджет на день: ' + Math.floor(appData.budgetDay) + ' рублей');
 
 console.log('Наша программа включает в себя данные: ');
 for (let elem in appData) {
