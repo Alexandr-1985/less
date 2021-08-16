@@ -1,14 +1,12 @@
 'use strict';
-/////////////////////////////////////////
 
 let isNumber = function(n) {
     return !isNaN(parseFloat(n)) && isFinite(n);
 };
 //while(isNaN(amount) || amount === '' || question === null)
-/////////////////////////////////////////////////////////////////////////
+
 let money;
 
-//question about salary
 //проверка вхоящийх данных
 let start = function() {
     do {
@@ -27,7 +25,7 @@ let appData = {
     mission: 100000,
     period: 3,
 
-    budget: money,
+    budget: +money,
     budgetDay: 0,
     budgetMonth: 0,
     expensesMonth: 0,
@@ -40,36 +38,37 @@ let appData = {
         );
         appData.addExpenses = addExpenses.toLocaleLowerCase().split(', ');
         appData.deposit = confirm('Есть ли у вас депозит в банке?');
-
+        let cash;
+        let question;
         for (let i = 0; i < 2; i++) {
-            let question = prompt('Введите обязательную статью расходов?', ' '); //appData.expenses[i]
-            let cash;
+            question = prompt('Введите обязательную статью расходов?', ' '); //appData.expenses[i]
             do {
-                cash = prompt('Во сколько это обойдется? ', ' ');
+                cash = +prompt('Во сколько это обойдется? ', ' ');
             } while (!isNumber(cash) || cash < 0);
-            cash = appData.expenses[question];
+            //   debugger;
+            appData.expenses[question] = cash;
         }
     },
     //Объявить ф-ю всех обязательных расходов
     getExpensesMonth: function() {
         for (let elem in appData.expenses) {
-            appData.getExpensesMonth += appData.expenses[elem];
+            appData.expensesMonth += appData.expenses[elem];
             console.log('key: ' + elem + ' value: ' + appData.expenses[elem]);
         }
-        console.log('Обязатеьные расходы за месяц:', appData.expensesMonth);
     },
 
     //Объявить ф-ю которая возвращает накопления за месяцев
-    getAccumulatedMonth: function() {
-        if (!money) {
-            money = 0;
+    getBudget: function() {
+        if (!appData.money) {
+            appData.money = 0;
         }
-        return money - appData.expensesMonth;
+        appData.budgetMonth = appData.money - appData.expensesMonth;
+        appData.budgetDay = appData.budgetMonth / 30;
     },
 
     //Обьявить функцию getTargetMonth. Подсчитать за какой период будет достигнута цель, зная результат месячного накопления accumulatedMonth и возвращает результат.
     getTargetMonth: function() {
-        return Math.round(appData.mission / appData.getBudget);
+        return Math.round(appData.mission / appData.budgetMonth);
     },
 
     //Конструктор условий
@@ -94,17 +93,12 @@ let appData = {
     },
 };
 
-/////////////////////////////////////////////////////////////////////////////////
 appData.asking();
 appData.getExpensesMonth();
-appData.getAccumulatedMonth();
-appData.getTargetMonth();
+appData.getBudget();
 
 //Объявить ф-ю которая возвращает накопления за месяцев
-console.log('Накопления за месяц: ', appData.getAccumulatedMonth(money));
-
-//обьявить переменную и присвоить результат вызова ф-ии
-appData.getBudget = appData.getAccumulatedMonth();
+console.log('Накопления за месяц: ', appData.budgetMonth);
 
 //Обьявить функцию getTargetMonth. Подсчитать за какой период будет достигнута цель, зная результат месячного накопления accumulatedMonth и возвращает результат.
 appData.targetMonth = appData.getTargetMonth(
@@ -118,26 +112,22 @@ appData.targetMonth >= 0 ?
         `Срок достижения цели не будет достигнут за: ${appData.targetMonth} месяцев`
     );
 
-//budgetMonth учитывая бюджет на месяц
-appData.budgetDay = appData.getBudget / 30;
+console.log('Обязательные расходы за месяц:', appData.expensesMonth);
 console.log('Бюджет на день: ' + Math.floor(appData.budgetDay) + ' рублей');
 
 //Конструктор условий
 appData.getStatusIncome(appData.budgetDay);
-console.log('Status: ', appData.getStatusIncome(appData.budgetDay));
+console.log('Status: ', appData.getStatusIncome());
 
-/////////////////////////////////////////////////
 console.log('Наша программа включает в себя данные: ');
 for (let elem in appData) {
     console.log('Свойства ' + elem, ' Значение: ' + appData[elem]);
 }
-////////////////////////////////////////////////////////
-/* 
-console.log(appData.addExpenses.length);
 
-console.log(
-    'Period is equal ' + appData.period + ' month. ',
-    `Goal to earn ${appData.mission} euro!`
-);
- */
-/////////////////////////////////////////
+//ppData.getTargetMonth();
+
+//обьявить переменную
+//appData.expensesMonth = appData.getExpensesMonth();
+
+//обьявить переменную и присвоить результат вызова ф-ии
+//appData.getBudget = appData.getAccumulatedMonth();
