@@ -59,10 +59,10 @@ let appData = {
 
     //Объявить ф-ю которая возвращает накопления за месяцев
     getBudget: function() {
-        if (!appData.money) {
-            appData.money = 0;
+        if (!money) {
+            money = 0;
         }
-        appData.budgetMonth = appData.money - appData.expensesMonth;
+        appData.budgetMonth = money - appData.expensesMonth;
         appData.budgetDay = appData.budgetMonth / 30;
     },
 
