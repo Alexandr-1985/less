@@ -73,11 +73,11 @@ let appData = {
 
     //Конструктор условий
     getStatusIncome: function(budgetDay) {
-        if (appData.budgetDay > 1200) {
+        if (appData.budgetDay >= 1200) {
             return 'У вас высокий уровень дохода';
-        } else if (600 < appData.budgetDay < 1200) {
+        } else if (appData.budgetDay >= 600 && appData.budgetDay < 1200) {
             return 'У вас средний уровень дохода';
-        } else if (600 > appData.budgetDay > 0) {
+        } else if (appData.budgetDay < 600 && appData.budgetDay >= 0) {
             return 'Уровень дохода ниже среднего';
         } else if (appData.budgetDay < 0) {
             return 'Что то пошло не так';
@@ -123,11 +123,3 @@ console.log('Наша программа включает в себя данны
 for (let elem in appData) {
     console.log('Свойства ' + elem, ' Значение: ' + appData[elem]);
 }
-
-//ppData.getTargetMonth();
-
-//обьявить переменную
-//appData.expensesMonth = appData.getExpensesMonth();
-
-//обьявить переменную и присвоить результат вызова ф-ии
-//appData.getBudget = appData.getAccumulatedMonth();
