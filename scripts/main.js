@@ -4,12 +4,12 @@ let isNumber = function(n) {
     return !isNaN(parseFloat(n)) && isFinite(n);
 };
 //while(isNaN(amount) || amount === '' || question === null)
-
+/* 
 const isString = (str, comma = false) => {
     const pattern = comma ? /^[, а-яА-ЯёЁa-zA-Z]+$/ : /^[ а-яА-ЯёЁa-zA-Z]+$/;
     return pattern.test(str);
 };
-
+ */
 let money;
 
 //проверка вхоящийх данных
@@ -44,11 +44,14 @@ let appData = {
             let cashIncome = 0;
             do {
                 itemIncome = prompt('Какой у вас дополнительный заработок?', 'Таксую');
-            } while (!isString(itemIncome));
+            } while (isNumber(itemIncome) || itemIncome.trim() === ' ');
 
             do {
                 cashIncome = prompt('Сколько в месяц вы на этом зарабатываете?', 10000);
-            } while (!isNumber(cashIncome));
+            } while (
+                (!isNumber(cashIncome) && cashIncome < 0) ||
+                cashIncome.trim() === ' '
+            );
 
             appData.income[itemIncome] = cashIncome;
         }
@@ -58,17 +61,33 @@ let appData = {
         do {
             addExpenses = prompt(
                 'Перечислите возможные расходы за рассчитываемый период через запятую',
-                'internet taxy communal payment credit'
+                'internet, taxy, communal, payment, credit'
             );
-        } while (!isString(addExpenses));
+        } while (isNumber(addExpenses));
+
+        function string() {
+            let string = addExpenses;
+            var splits = string.split(' ');
+            var stringItog = '';
+
+            for (let i = 0; i < splits.length; i++) {
+                let Name = splits[i];
+                let First = Name.substring(0, 1).toUpperCase();
+                let Leftovers = Name.substring(1, Name.length);
+                stringItog += First + Leftovers + ' ';
+            }
+
+            console.log(stringItog);
+        }
+        string();
 
         // appData.addExpenses = addExpenses.toLocaleLowerCase().split(', ');
-        appData.addExpenses = addExpenses
-            .toLowerCase()
-            .split(' ')
-            .map((x) => x[0].toUpperCase() + x.slice(1))
-            .join(' ');
-        console.log('appData.addExpenses: ', appData.addExpenses);
+        /*    appData.addExpenses = addExpenses
+                                                                    .toLowerCase()
+                                                                    .split(' ')
+                                                                    .map((x) => x[0].toUpperCase() + x.slice(1))
+                                                                    .join(' ');
+                                                                console.log('appData.addExpenses: ', appData.addExpenses); */
 
         appData.deposit = confirm('Есть ли у вас депозит в банке?');
         let cash = 0;
@@ -77,11 +96,11 @@ let appData = {
             if (confirm('Есть ли у вас обязательные расходы')) {
                 do {
                     question = prompt('Введите обязательную статью расходов?', ' ');
-                } while (!isString(question));
+                } while (isNumber(question) || question.trim() === ' ');
             }
             do {
-                cash = +prompt('Во сколько это обойдется? ', ' ');
-            } while (!isNumber(cash) && cash < 0);
+                cash = +prompt('Во сколько это обойдется? ');
+            } while ((!isNumber(cash) && cash <= 0) || question.trim() === ' ');
             //   debugger;
             appData.expenses[question] = cash;
         }
@@ -127,10 +146,16 @@ let appData = {
         if (appData.deposite) {
             do {
                 appData.precentDeposit = prompt('Какой годовой процент?', '10');
-            } while (!isNumber(appData.precentDeposit) && appData.precentDeposit < 0);
+            } while (
+                isNumber(appData.precentDeposit) ||
+                appData.precentDeposit.trim() === ' '
+            );
             do {
                 appData.moneyDeposit = prompt('Какая сумма заложена?', 10000);
-            } while (!isNumber(appData.moneyDeposit) && appData.moneyDeposit < 0);
+            } while (
+                (!isNumber(appData.moneyDeposit) && appData.moneyDeposit <= 0) ||
+                appData.moneyDeposit.trim() === ' '
+            );
         }
     },
 
