@@ -48,7 +48,7 @@ let appData = {
             do {
                 cashIncome = prompt('Сколько в месяц вы на этом зарабатываете?');
             } while (
-                (!isNumber(cashIncome) && cashIncome < 0) ||
+                (!isNumber(cashIncome) && cashIncome <= 0) ||
                 cashIncome.trim() === ''
             );
             appData.income[itemIncome] = +cashIncome;
@@ -83,7 +83,7 @@ let appData = {
 
                 do {
                     cash = +prompt('Во сколько это обойдется?');
-                } while (!isNumber(cash) && cash <= 0); //||cash.trim() === ''
+                } while ((!isNumber(cash) && cash <= 0) || cash === ''); //||cash.trim() === ''
                 //   debugger;
                 appData.expenses[question] = +cash;
             }
