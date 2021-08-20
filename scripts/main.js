@@ -1,14 +1,12 @@
 'use strict';
 
 let isNumber = function(n) {
-    return !isNaN(parseFloat(n)) && isFinite(n);
+    return (!isNaN(parseFloat(n)) && isFinite(n)) || n.trim() === ' ';
 };
-//while(isNaN(amount) || amount === '' || question === null)
 
-const isString = (str, comma = false) => {
-    const pattern = comma ? /^[, а-яА-ЯёЁa-zA-Z]+$/ : /^[ а-яА-ЯёЁa-zA-Z]+$/;
-    return pattern.test(str);
-};
+function isString(s) {
+    return !(!isNumber(s) || s === undefined || s === null || s.trim() === ' ');
+}
 
 let money;
 
@@ -16,8 +14,9 @@ let money;
 let start = function() {
     do {
         money = prompt('Ваш месячный доход?');
-    } while (!isNumber(money));
+    } while (!isNumber(money)); //|| money.trim() === ' '
 };
+
 start();
 
 //создаем объект, будет содержать все переменные которые мы создавали, будут св-ми объекта!
@@ -43,32 +42,32 @@ let appData = {
             let itemIncome = ' ';
             let cashIncome = 0;
             do {
-                itemIncome = prompt('Какой у вас дополнительный заработок?', 'Таксую');
-            } while (!isString(itemIncome));
+                itemIncome = prompt('Какой у вас дополнительный заработок?');
+            } while (isString(itemIncome) || itemIncome.trim() === ''); //||itemIncome.trim() === ' ' ||itemIncome === null || itemIncome === undefined
 
             do {
-                cashIncome = prompt('Сколько в месяц вы на этом зарабатываете?', 10000);
-            } while (!isNumber(cashIncome));
-
-            appData.income[itemIncome] = cashIncome;
+                cashIncome = prompt('Сколько в месяц вы на этом зарабатываете?');
+            } while (!isNumber(cashIncome) || cashIncome.trim() === '');
+            appData.income[itemIncome] = +cashIncome;
         }
 
         // возможные расходы
-        let addExpenses = ' ';
+        let addExpenses = '';
         do {
             addExpenses = prompt(
-                'Перечислите возможные расходы за рассчитываемый период через запятую',
-                'internet taxy communal payment credit'
+                'Перечислите возможные расходы за рассчитываемый период через запятую'
             );
-        } while (!isString(addExpenses));
+        } while (isString(addExpenses) || addExpenses.trim() === '');
 
-        // appData.addExpenses = addExpenses.toLocaleLowerCase().split(', ');
-        appData.addExpenses = addExpenses
-            .toLowerCase()
-            .split(' ')
-            .map((x) => x[0].toUpperCase() + x.slice(1))
-            .join(' ');
-        console.log('appData.addExpenses: ', appData.addExpenses);
+        appData.addExpenses = addExpenses.toLocaleLowerCase().split(', ');
+        console.log(appData.addExpenses);
+        //Начало слова с заглавной буквы
+        console.log(
+            appData.addExpenses.map(
+                (item) =>
+                item.toLowerCase().trim().slice(0, 1).toUpperCase() + item.slice(1)
+            )
+        );
 
         appData.deposit = confirm('Есть ли у вас депозит в банке?');
         let cash = 0;
@@ -76,14 +75,15 @@ let appData = {
         for (let i = 0; i < 2; i++) {
             if (confirm('Есть ли у вас обязательные расходы')) {
                 do {
-                    question = prompt('Введите обязательную статью расходов?', ' ');
-                } while (!isString(question));
+                    question = prompt('Введите обязательную статью расходов?');
+                } while (isString(question) || question.trim() === '');
+
+                do {
+                    cash = prompt('Во сколько это обойдется?');
+                } while (!isNumber(cash) || cash.trim() === '');
+                //   debugger;
+                appData.expenses[question] = +cash;
             }
-            do {
-                cash = +prompt('Во сколько это обойдется? ', ' ');
-            } while (!isNumber(cash) && cash < 0);
-            //   debugger;
-            appData.expenses[question] = cash;
         }
     },
     //Объявить ф-ю всех обязательных расходов
@@ -127,10 +127,16 @@ let appData = {
         if (appData.deposite) {
             do {
                 appData.precentDeposit = prompt('Какой годовой процент?', '10');
-            } while (!isNumber(appData.precentDeposit) && appData.precentDeposit < 0);
+            } while (
+                isString(appData.precentDeposit) ||
+                appData.precentDeposit.trim() === ''
+            );
             do {
                 appData.moneyDeposit = prompt('Какая сумма заложена?', 10000);
-            } while (!isNumber(appData.moneyDeposit) && appData.moneyDeposit < 0);
+            } while (
+                (!isNumber(appData.moneyDeposit) && appData.moneyDeposit <= 0) ||
+                appData.moneyDeposit.trim() === ''
+            );
         }
     },
 
@@ -162,9 +168,40 @@ for (let elem in appData) {
     console.log('Свойства ' + elem, ' Значение: ' + appData[elem]);
 }
 
-/* appData.getInfoDeposit();
+/*
+appData.getInfoDeposit();
 console.log(
     appData.precentDeposit,
     appData.moneyDeposit,
     appData.calcSavedMoney
-); */
+);*/
+
+//while(isNaN(amount) || amount === '' || question === null)
+/* 
+        const isString = (str, comma = false) => {
+            const pattern = comma ? /^[, а-яА-ЯёЁa-zA-Z]+$/ : /^[ а-яА-ЯёЁa-zA-Z]+$/;
+            return pattern.test(str);
+        };
+         */
+
+/*
+        appData.addExpenses = addExpenses
+        .toLowerCase()
+        .split(' ')
+        .map((x) => x[0].toUpperCase() + x.slice(1))
+        .join(' ');
+        console.log('appData.addExpenses: ', appData.addExpenses);
+        */
+/*function string() {
+        let string = addExpenses;
+        var splits = string.split(' ');
+        var stringItog = '';
+        for (let i = 0; i < splits.length; i++) {
+        let Name = splits[i];
+        let First = Name.substring(0, 1).toUpperCase();
+        let Leftovers = Name.substring(1, Name.length);
+        stringItog += First + Leftovers + ' ';
+        }
+        console.log(stringItog);
+        }
+        string(); */
