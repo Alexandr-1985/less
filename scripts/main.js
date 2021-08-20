@@ -14,7 +14,7 @@ let money;
 let start = function() {
     do {
         money = prompt('Ваш месячный доход?');
-    } while (!isNumber(money)); //|| money.trim() === ' '
+    } while (!isNumber(money));
 };
 
 start();
@@ -43,14 +43,11 @@ let appData = {
             let cashIncome = 0;
             do {
                 itemIncome = prompt('Какой у вас дополнительный заработок?');
-            } while (isString(itemIncome) || itemIncome.trim() === ''); //||itemIncome.trim() === ' ' ||itemIncome === null || itemIncome === undefined
+            } while (isString(itemIncome) || itemIncome.trim() === '');
 
             do {
                 cashIncome = prompt('Сколько в месяц вы на этом зарабатываете?');
-            } while (
-                (!isNumber(cashIncome) && cashIncome <= 0) ||
-                cashIncome.trim() === ''
-            );
+            } while (!isNumber(cashIncome) || cashIncome.trim() === '');
             appData.income[itemIncome] = +cashIncome;
         }
 
@@ -82,8 +79,8 @@ let appData = {
                 } while (isString(question) || question.trim() === '');
 
                 do {
-                    cash = +prompt('Во сколько это обойдется?');
-                } while ((!isNumber(cash) && cash <= 0) || cash === ''); //||cash.trim() === ''
+                    cash = prompt('Во сколько это обойдется?');
+                } while (!isNumber(cash) || cash.trim() === '');
                 //   debugger;
                 appData.expenses[question] = +cash;
             }
@@ -136,8 +133,7 @@ let appData = {
             );
             do {
                 appData.moneyDeposit = prompt('Какая сумма заложена?', 10000);
-            } while (
-                (!isNumber(appData.moneyDeposit) && appData.moneyDeposit <= 0) ||
+            } while (!isNumber(appData.moneyDeposit) ||
                 appData.moneyDeposit.trim() === ''
             );
         }
