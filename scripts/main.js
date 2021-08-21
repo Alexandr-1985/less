@@ -9,7 +9,6 @@ function isString(s) {
 }
 
 let money;
-
 //проверка вхоящийх данных
 let start = function() {
     do {
@@ -18,6 +17,82 @@ let start = function() {
 };
 
 start();
+
+///////////////////////////////////////////////////////////////////
+//получить каждый элемент в отдельную переменную через Кнопку "Рассчитать", через id
+console.log(document.getElementById('start'));
+console.log(document.querySelector('#start'));
+//получить каждый элемент в отдельную переменную через Кнопки “+” (плюс), через Tag, каждую в своей переменной.
+const incomeBtn = document.getElementsByTagName('button')[0];
+console.log(incomeBtn);
+const btnIncome = document.querySelector('.income_add');
+console.log(btnIncome);
+const expensesBtn = document.getElementsByTagName('button')[1];
+console.log(expensesBtn);
+const btnExpenses = document.querySelector('.expenses_add');
+console.log(btnExpenses);
+//получить каждый элемент в отдельную переменную через Чекбокс по id через querySelector
+const checkbox = document.querySelector('#deposit-check');
+console.log(checkbox);
+//получить каждый элемент в отдельную переменную через Поля для ввода возможных доходов (additional_income-item) при помощи querySelectorAll
+const addIncomeItem = document.querySelectorAll('.additional_income-item');
+console.log(addIncomeItem);
+//получить каждый элемент в отдельную переменную через Каждый элемент в правой части программы через класс(не через querySelector), которые имеют в имени класса "-value", начиная с class="budget_day-value" и заканчивая class="target_month-value">
+const budgetMonthValue = document.querySelector('.budget_month-value');
+console.log(budgetMonthValue);
+const budgetDayValue = document.getElementsByClassName('budget_day-value');
+console.log(budgetDayValue);
+const additionalIncomeValue = document.getElementsByClassName(
+    'additional_income-value'
+);
+console.log(additionalIncomeValue);
+const additionalEexpensesValue = document.getElementsByClassName(
+    'additional_expenses-value'
+);
+console.log(additionalEexpensesValue);
+const incomePeriodValue = document.getElementsByClassName(
+    'income_period-value'
+);
+console.log(incomePeriodValue);
+const targetMonthValue = document.getElementsByClassName('target_month-value');
+console.log(targetMonthValue);
+
+//получить каждый элемент в отдельную переменную через Оставшиеся поля через querySelector каждый в отдельную переменную: поля ввода (input) с левой стороны и не забудьте про range.
+const range = document.querySelector('.period-selector');
+console.log(range);
+const title = document.querySelectorAll('.title');
+console.log(title);
+
+const salaryAmount = document.querySelector('.salary-amount');
+console.log(salaryAmount);
+const incomeTitle = document.querySelector('.income-title');
+console.log(incomeTitle);
+const incomeAmount = document.querySelector('.income-amount');
+console.log(incomeAmount);
+//или
+const incomeItems = document.querySelector('.income-items');
+console.log('incomeTitle: ', incomeItems.children[0]);
+console.log('incomeAmount: ', incomeItems.children[1]);
+
+const additionalIncome = document.querySelector('.additional_income');
+console.log('additional_income-Item: ', additionalIncome.children[0]);
+console.log('additional_income-Item: ', additionalIncome.children[1]);
+
+const expensesItems = document.querySelector('.expenses-items');
+console.log('expenses-title: ', expensesItems.children[0]);
+console.log('expenses-amount: ', expensesItems.children[1]);
+
+const additionalExpensesItem = document.querySelector(
+    '.additional_expenses-item'
+);
+console.log(additionalExpensesItem);
+
+const depositCalc = document.querySelector('.deposit-calc');
+console.log('deposit-amount: ', depositCalc.children[0]);
+console.log('deposit-percent: ', depositCalc.children[1]);
+
+const targetAmount = document.querySelector('.target-amount');
+console.log(targetAmount);
 
 //создаем объект, будет содержать все переменные которые мы создавали, будут св-ми объекта!
 let appData = {
@@ -174,79 +249,3 @@ console.log(
     appData.moneyDeposit,
     appData.calcSavedMoney
 );*/
-
-///////////////////////////////////////////////////////////////////
-//получить каждый элемент в отдельную переменную через Кнопку "Рассчитать", через id
-console.log(document.getElementById('start'));
-console.log(document.querySelector('#start'));
-//получить каждый элемент в отдельную переменную через Кнопки “+” (плюс), через Tag, каждую в своей переменной.
-const incomeBtn = document.getElementsByTagName('button')[0];
-console.log(incomeBtn);
-const btnIncome = document.querySelector('.income_add');
-console.log(btnIncome);
-const expensesBtn = document.getElementsByTagName('button')[1];
-console.log(expensesBtn);
-const btnExpenses = document.querySelector('.expenses_add');
-console.log(btnExpenses);
-//получить каждый элемент в отдельную переменную через Чекбокс по id через querySelector
-const checkbox = document.querySelector('#deposit-check');
-console.log(checkbox);
-//получить каждый элемент в отдельную переменную через Поля для ввода возможных доходов (additional_income-item) при помощи querySelectorAll
-const addIncomeItem = document.querySelectorAll('.additional_income-item');
-console.log(addIncomeItem);
-//получить каждый элемент в отдельную переменную через Каждый элемент в правой части программы через класс(не через querySelector), которые имеют в имени класса "-value", начиная с class="budget_day-value" и заканчивая class="target_month-value">
-const budgetMonthValue = document.querySelector('.budget_month-value');
-console.log(budgetMonthValue);
-const budgetDayValue = document.getElementsByClassName('budget_day-value');
-console.log(budgetDayValue);
-const additionalIncomeValue = document.getElementsByClassName(
-    'additional_income-value'
-);
-console.log(additionalIncomeValue);
-const additionalEexpensesValue = document.getElementsByClassName(
-    'additional_expenses-value'
-);
-console.log(additionalEexpensesValue);
-const incomePeriodValue = document.getElementsByClassName(
-    'income_period-value'
-);
-console.log(incomePeriodValue);
-const targetMonthValue = document.getElementsByClassName('target_month-value');
-console.log(targetMonthValue);
-
-//получить каждый элемент в отдельную переменную через Оставшиеся поля через querySelector каждый в отдельную переменную: поля ввода (input) с левой стороны и не забудьте про range.
-const range = document.querySelector('.period-selector');
-console.log(range);
-const title = document.querySelectorAll('.title');
-console.log(title);
-
-const salaryAmount = document.querySelector('.salary-amount');
-console.log(salaryAmount);
-const incomeTitle = document.querySelector('.income-title');
-console.log(incomeTitle);
-const incomeAmount = document.querySelector('.income-amount');
-console.log(incomeAmount);
-//или
-const incomeItems = document.querySelector('.income-items');
-console.log('incomeTitle: ', incomeItems.children[0]);
-console.log('incomeAmount: ', incomeItems.children[1]);
-
-const additionalIncome = document.querySelector('.additional_income');
-console.log('additional_income-Item: ', additionalIncome.children[0]);
-console.log('additional_income-Item: ', additionalIncome.children[1]);
-
-const expensesItems = document.querySelector('.expenses-items');
-console.log('expenses-title: ', expensesItems.children[0]);
-console.log('expenses-amount: ', expensesItems.children[1]);
-
-const additionalExpensesItem = document.querySelector(
-    '.additional_expenses-item'
-);
-console.log(additionalExpensesItem);
-
-const depositCalc = document.querySelector('.deposit-calc');
-console.log('deposit-amount: ', depositCalc.children[0]);
-console.log('deposit-percent: ', depositCalc.children[1]);
-
-const targetAmount = document.querySelector('.target-amount');
-console.log(targetAmount);
