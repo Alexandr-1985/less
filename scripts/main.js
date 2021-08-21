@@ -175,37 +175,6 @@ console.log(
     appData.calcSavedMoney
 );*/
 
-<<<<<<< HEAD
-//while(isNaN(amount) || amount === '' || question === null)
-/* 
-        const isString = (str, comma = false) => {
-            const pattern = comma ? /^[, а-яА-ЯёЁa-zA-Z]+$/ : /^[ а-яА-ЯёЁa-zA-Z]+$/;
-            return pattern.test(str);
-        };
-         */
-
-/*
-        appData.addExpenses = addExpenses
-        .toLowerCase()
-        .split(' ')
-        .map((x) => x[0].toUpperCase() + x.slice(1))
-        .join(' ');
-        console.log('appData.addExpenses: ', appData.addExpenses);
-        */
-/*function string() {
-        let string = addExpenses;
-        var splits = string.split(' ');
-        var stringItog = '';
-        for (let i = 0; i < splits.length; i++) {
-        let Name = splits[i];
-        let First = Name.substring(0, 1).toUpperCase();
-        let Leftovers = Name.substring(1, Name.length);
-        stringItog += First + Leftovers + ' ';
-        }
-        console.log(stringItog);
-        }
-        string(); */
-=======
 ///////////////////////////////////////////////////////////////////
 //получить каждый элемент в отдельную переменную через Кнопку "Рассчитать", через id
 console.log(document.getElementById('start'));
@@ -281,4 +250,3 @@ console.log('deposit-percent: ', depositCalc.children[1]);
 
 const targetAmount = document.querySelector('.target-amount');
 console.log(targetAmount);
->>>>>>> lesson09
