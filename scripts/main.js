@@ -20,8 +20,8 @@ start();
 
 ///////////////////////////////////////////////////////////////////
 //получить каждый элемент в отдельную переменную через Кнопку "Рассчитать", через id
-console.log(document.getElementById('start'));
-console.log(document.querySelector('#start'));
+const btnStart = document.getElementById('#start');
+console.log(btnStart);
 //получить каждый элемент в отдельную переменную через Кнопки “+” (плюс), через Tag, каждую в своей переменной.
 const incomeBtn = document.getElementsByTagName('button')[0];
 console.log(incomeBtn);
@@ -60,8 +60,6 @@ console.log(targetMonthValue);
 //получить каждый элемент в отдельную переменную через Оставшиеся поля через querySelector каждый в отдельную переменную: поля ввода (input) с левой стороны и не забудьте про range.
 const range = document.querySelector('.period-selector');
 console.log(range);
-const title = document.querySelectorAll('.title');
-console.log(title);
 
 const salaryAmount = document.querySelector('.salary-amount');
 console.log(salaryAmount);
@@ -249,3 +247,8 @@ console.log(
     appData.moneyDeposit,
     appData.calcSavedMoney
 );*/
+
+/* const title = document.querySelectorAll('.title');
+console.log(title); */
+/* const btnStartClass = document.getElementById('start');
+console.log(document.getElementById('start')); */
