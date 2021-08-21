@@ -20,17 +20,13 @@ start();
 
 ///////////////////////////////////////////////////////////////////
 //получить каждый элемент в отдельную переменную через Кнопку "Рассчитать", через id
-const btnStart = document.getElementById('#start');
+const btnStart = document.getElementById('start');
 console.log(btnStart);
 //получить каждый элемент в отдельную переменную через Кнопки “+” (плюс), через Tag, каждую в своей переменной.
 const incomeBtn = document.getElementsByTagName('button')[0];
 console.log(incomeBtn);
-const btnIncome = document.querySelector('.income_add');
-console.log(btnIncome);
 const expensesBtn = document.getElementsByTagName('button')[1];
 console.log(expensesBtn);
-const btnExpenses = document.querySelector('.expenses_add');
-console.log(btnExpenses);
 //получить каждый элемент в отдельную переменную через Чекбокс по id через querySelector
 const checkbox = document.querySelector('#deposit-check');
 console.log(checkbox);
@@ -58,7 +54,7 @@ const targetMonthValue = document.getElementsByClassName('target_month-value');
 console.log(targetMonthValue);
 
 //получить каждый элемент в отдельную переменную через Оставшиеся поля через querySelector каждый в отдельную переменную: поля ввода (input) с левой стороны и не забудьте про range.
-const range = document.querySelector('.period-selector');
+const range = document.querySelector('.period-select');
 console.log(range);
 
 const salaryAmount = document.querySelector('.salary-amount');
