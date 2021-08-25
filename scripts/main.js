@@ -1,250 +1,90 @@
 'use strict';
 
-let isNumber = function(n) {
-    return (!isNaN(parseFloat(n)) && isFinite(n)) || n.trim() === ' ';
-};
+//Работа с Index1.html
+const books = document.querySelectorAll('.books'),
+    arrBook = document.querySelectorAll('.book');
 
-function isString(s) {
-    return !(!isNumber(s) || s === undefined || s === null || s.trim() === ' ');
+console.log(books);
+console.log(arrBook);
+
+//Восстановить порядок книг.
+const arr = Object.keys(arrBook).sort((prev, next) => {
+    if (
+        arrBook[prev].firstElementChild.innerText >
+        arrBook[next].firstElementChild.innerText
+    ) {
+        return 1;
+    }
+    if (
+        arrBook[prev].firstElementChild.innerText <
+        arrBook[next].firstElementChild.innerText
+    ) {
+        return -1;
+    }
+});
+for (let i = 0; i < arr.length; i++) {
+    books[0].append(arrBook[arr[i]]);
 }
 
-let money;
-//проверка вхоящийх данных
-let start = function() {
-    do {
-        money = prompt('Ваш месячный доход?');
-    } while (!isNumber(money));
-};
+//Заменить картинку заднего фона на другую из папки image
+document.querySelector('body').style.background = 'url(./image/open_book.jpg)';
+//document.querySelector('body').style.backgroundImage = ('url(./image/open_book.jpg)');
 
-start();
+//Исправить заголовок в книге 3( Получится - "Книга 3. this и Прототипы Объектов")
+books[0].children[2].querySelector('h2').querySelector('a').textContent =
+    '"Книга 3. this и Прототипы Объектов"';
 
-///////////////////////////////////////////////////////////////////
-//получить каждый элемент в отдельную переменную через Кнопку "Рассчитать", через id
-const btnStart = document.getElementById('start');
-console.log(btnStart);
-//получить каждый элемент в отдельную переменную через Кнопки “+” (плюс), через Tag, каждую в своей переменной.
-const incomeBtn = document.getElementsByTagName('button')[0];
-console.log(incomeBtn);
-const expensesBtn = document.getElementsByTagName('button')[1];
-console.log(expensesBtn);
-//получить каждый элемент в отдельную переменную через Чекбокс по id через querySelector
-const checkbox = document.querySelector('#deposit-check');
-console.log(checkbox);
-//получить каждый элемент в отдельную переменную через Поля для ввода возможных доходов (additional_income-item) при помощи querySelectorAll
-const addIncomeItem = document.querySelectorAll('.additional_income-item');
-console.log(addIncomeItem);
-//получить каждый элемент в отдельную переменную через Каждый элемент в правой части программы через класс(не через querySelector), которые имеют в имени класса "-value", начиная с class="budget_day-value" и заканчивая class="target_month-value">
-const budgetMonthValue = document.querySelector('.budget_month-value');
-console.log(budgetMonthValue);
-const budgetDayValue = document.getElementsByClassName('budget_day-value');
-console.log(budgetDayValue);
-const additionalIncomeValue = document.getElementsByClassName(
-    'additional_income-value'
-);
-console.log(additionalIncomeValue);
-const additionalEexpensesValue = document.getElementsByClassName(
-    'additional_expenses-value'
-);
-console.log(additionalEexpensesValue);
-const incomePeriodValue = document.getElementsByClassName(
-    'income_period-value'
-);
-console.log(incomePeriodValue);
-const targetMonthValue = document.getElementsByClassName('target_month-value');
-console.log(targetMonthValue);
+//Удалить рекламу со страницы
+document.querySelector('.adv').remove();
 
-//получить каждый элемент в отдельную переменную через Оставшиеся поля через querySelector каждый в отдельную переменную: поля ввода (input) с левой стороны и не забудьте про range.
-const range = document.querySelector('.period-select');
-console.log(range);
-
-const salaryAmount = document.querySelector('.salary-amount');
-console.log(salaryAmount);
-const incomeTitle = document.querySelector('.income-title');
-console.log(incomeTitle);
-const incomeAmount = document.querySelector('.income-amount');
-console.log(incomeAmount);
-//или
-const incomeItems = document.querySelector('.income-items');
-console.log('incomeTitle: ', incomeItems.children[0]);
-console.log('incomeAmount: ', incomeItems.children[1]);
-
-const additionalIncome = document.querySelector('.additional_income');
-console.log('additional_income-Item: ', additionalIncome.children[0]);
-console.log('additional_income-Item: ', additionalIncome.children[1]);
-
-const expensesItems = document.querySelector('.expenses-items');
-console.log('expenses-title: ', expensesItems.children[0]);
-console.log('expenses-amount: ', expensesItems.children[1]);
-
-const additionalExpensesItem = document.querySelector(
-    '.additional_expenses-item'
-);
-console.log(additionalExpensesItem);
-
-const depositCalc = document.querySelector('.deposit-calc');
-console.log('deposit-amount: ', depositCalc.children[0]);
-console.log('deposit-percent: ', depositCalc.children[1]);
-
-const targetAmount = document.querySelector('.target-amount');
-console.log(targetAmount);
-
-//создаем объект, будет содержать все переменные которые мы создавали, будут св-ми объекта!
-let appData = {
-    income: {}, //дополнительные доходы
-    addIncome: [], //дополнительные доходы
-    expenses: {}, //дополнительные расходы
-    addExpenses: [], //массив с возможными расходами
-    deposite: false,
-    precentDeposit: 0, //под какой % вложено
-    moneyDeposit: 0, //сколько вложено
-    mission: 100000, //желаемая цель
-    period: 3,
-
-    budget: +money,
-    budgetDay: 0,
-    budgetMonth: 0,
-    expensesMonth: 0,
-    //новый метод который расспрашивает пользователя
-    asking: function() {
-        //есть ли у пользователя заработок
-        if (confirm('Есть ли у вас дополнительный заработок')) {
-            let itemIncome = ' ';
-            let cashIncome = 0;
-            do {
-                itemIncome = prompt('Какой у вас дополнительный заработок?');
-            } while (isString(itemIncome) || itemIncome.trim() === '');
-
-            do {
-                cashIncome = prompt('Сколько в месяц вы на этом зарабатываете?');
-            } while (!isNumber(cashIncome) || cashIncome.trim() === '');
-            appData.income[itemIncome] = +cashIncome;
-        }
-
-        // возможные расходы
-        let addExpenses = '';
-        do {
-            addExpenses = prompt(
-                'Перечислите возможные расходы за рассчитываемый период через запятую'
-            );
-        } while (isString(addExpenses) || addExpenses.trim() === '');
-
-        appData.addExpenses = addExpenses.toLocaleLowerCase().split(', ');
-        console.log(appData.addExpenses);
-        //Начало слова с заглавной буквы
-        console.log(
-            appData.addExpenses.map(
-                (item) =>
-                item.toLowerCase().trim().slice(0, 1).toUpperCase() + item.slice(1)
-            )
-        );
-
-        appData.deposit = confirm('Есть ли у вас депозит в банке?');
-        let cash = 0;
-        let question;
-        for (let i = 0; i < 2; i++) {
-            if (confirm('Есть ли у вас обязательные расходы')) {
-                do {
-                    question = prompt('Введите обязательную статью расходов?');
-                } while (isString(question) || question.trim() === '');
-
-                do {
-                    cash = prompt('Во сколько это обойдется?');
-                } while (!isNumber(cash) || cash.trim() === '');
-                //   debugger;
-                appData.expenses[question] = +cash;
+//Восстановить порядок глав во второй и пятой книге (внимательно инспектируйте индексы элементов, поможет dev tools)
+const sortChapterLi = (collection) => {
+    const sortElements = (arr) => {
+        const arrLi = Object.keys(arr).sort((prev, next) => {
+            if (arr[prev].textContent > arr[next].textContent) {
+                return 1;
             }
+            if (arr[prev].textContent < arr[next].textContent) {
+                return -1;
+            }
+        });
+        let arrNewLi = [];
+        for (let i = 0; i < arrLi.length; i++) {
+            arrNewLi.push(arr[arrLi[i]]);
         }
-    },
-    //Объявить ф-ю всех обязательных расходов
-    getExpensesMonth: function() {
-        for (let elem in appData.expenses) {
-            appData.expensesMonth += appData.expenses[elem];
-            console.log('key: ' + elem + ' value: ' + appData.expenses[elem]);
+        return arrNewLi;
+    };
+
+    let arrChapters = [];
+    let arrApp = [];
+
+    const elem = collection.querySelectorAll('li');
+    elem.forEach((elLi) => {
+        if (elLi.textContent.indexOf('Введение') > 1) {
+            collection.insertAdjacentElement('beforebegin', elem[0]);
+        } else if (elLi.textContent.indexOf('Предисловие') > 1) {
+            collection.insertAdjacentElement('beforebegin', elem[1]);
+        } else if (elLi.textContent.indexOf('Глава') > -1) {
+            arrChapters.push(elLi);
+        } else if (elLi.textContent.indexOf('Приложение') > -1) {
+            arrApp.push(elLi);
         }
-    },
-
-    //Объявить ф-ю которая возвращает накопления за месяцев
-    getBudget: function() {
-        if (!money) {
-            money = 0;
-        }
-        appData.budgetMonth = money - appData.expensesMonth;
-        appData.budgetDay = Math.ceil(appData.budgetMonth / 30);
-    },
-
-    //Обьявить функцию getTargetMonth. Подсчитать за какой период будет достигнута цель, зная результат месячного накопления accumulatedMonth и возвращает результат.
-    getTargetMonth: function() {
-        return Math.round(appData.mission / appData.budgetMonth);
-    },
-
-    //Конструктор условий
-    getStatusIncome: function(budgetDay) {
-        if (appData.budgetDay >= 1200) {
-            return 'У вас высокий уровень дохода';
-        } else if (appData.budgetDay >= 600 && appData.budgetDay < 1200) {
-            return 'У вас средний уровень дохода';
-        } else if (appData.budgetDay < 600 && appData.budgetDay >= 0) {
-            return 'Уровень дохода ниже среднего';
-        } else if (appData.budgetDay < 0) {
-            return 'Что то пошло не так';
-        } else {
-            return 'Иди к начальнику проси повышения';
-        }
-    },
-
-    getInfoDeposit: function() {
-        if (appData.deposite) {
-            do {
-                appData.precentDeposit = prompt('Какой годовой процент?', '10');
-            } while (
-                isString(appData.precentDeposit) ||
-                appData.precentDeposit.trim() === ''
-            );
-            do {
-                appData.moneyDeposit = prompt('Какая сумма заложена?', 10000);
-            } while (!isNumber(appData.moneyDeposit) ||
-                appData.moneyDeposit.trim() === ''
-            );
-        }
-    },
-
-    calcSavedMoney: function() {
-        return appData.budgetMonth * appData.period;
-    },
+    });
+    arrChapters = sortElements(arrChapters);
+    arrChapters.forEach((elLi) => {
+        collection.append(elLi);
+    });
+    arrApp = sortElements(arrApp);
+    arrApp.forEach((elLi) => {
+        collection.append(elLi);
+    });
 };
 
-appData.asking();
-appData.getExpensesMonth();
-appData.getBudget();
+sortChapterLi(books[0].children[1].querySelector('ul'));
+sortChapterLi(books[0].children[4].querySelector('ul'));
 
-//Обьявить функцию getTargetMonth. Подсчитать за какой период будет достигнута цель, зная результат месячного накопления accumulatedMonth и возвращает результат.
-appData.targetMonth = appData.getTargetMonth(
-    appData.mission,
-    appData.getBudget
-);
-
-appData.targetMonth >= 0 ?
-    console.log(`Срок достижения цели за: ${appData.targetMonth} месяцев`) :
-    console.log(
-        `Срок достижения цели не будет достигнут за: ${appData.targetMonth} месяцев`
-    );
-console.log('Status: ', appData.getStatusIncome());
-console.log('Бюджет на день: ' + Math.floor(appData.budgetDay) + ' рублей');
-
-console.log('Наша программа включает в себя данные: ');
-for (let elem in appData) {
-    console.log('Свойства ' + elem, ' Значение: ' + appData[elem]);
-}
-
-/*
-appData.getInfoDeposit();
-console.log(
-    appData.precentDeposit,
-    appData.moneyDeposit,
-    appData.calcSavedMoney
-);*/
-
-/* const title = document.querySelectorAll('.title');
-console.log(title); */
-/* const btnStartClass = document.getElementById('start');
-console.log(document.getElementById('start')); */
+//в шестой книге добавить главу “Глава 8: За пределами ES6” и поставить её в правильное место
+let chapter = document.createElement('li');
+chapter.innerText = 'Глава 8: За пределами ES6';
+let chapterNew = books[0].children[5].querySelector('ul').append(chapter);
+sortChapterLi(chapterNew);
