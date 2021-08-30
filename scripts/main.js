@@ -70,8 +70,6 @@ let appData = {
     expensesMonth: 0,
     //проверка вхоящийх данных
     start: function() {
-        appData.blockStart();
-
         //при вызове input будет присваиваться месячный доход в наш бюджет
         appData.budget = +salaryAmount.value;
 
@@ -119,7 +117,11 @@ let appData = {
             console.log(item);
             let itemExpenses = item.querySelector('.expenses-title').value;
             let cashExpenses = item.querySelector('.expenses-amount').value;
-            if (itemExpenses !== '' && cashExpenses !== '') {
+            if (
+                isNumber(cashExpenses) &&
+                itemExpenses !== '' &&
+                cashExpenses !== ''
+            ) {
                 appData.expenses[itemExpenses] = +cashExpenses; //+
             } //key = value
         });
@@ -142,7 +144,7 @@ let appData = {
             let itemIncomes = item.querySelector('.income-title').value;
             let cashIncomes = item.querySelector('.income-amount').value;
 
-            if (itemIncomes !== '' && cashIncomes !== '') {
+            if (isNumber(cashIncomes) && itemIncomes !== '' && cashIncomes !== '') {
                 appData.income[itemIncomes] = +cashIncomes; //+
             }
         });
@@ -194,7 +196,7 @@ let appData = {
 
     //Обьявить функцию getTargetMonth. Подсчитать за какой период будет достигнута цель, зная результат месячного накопления accumulatedMonth и возвращает результат.
     getTargetMonth: function() {
-        return targetAmount.value / appData.budgetMonth;
+        return isNumber(targetAmount.value) / appData.budgetMonth;
     },
 
     //Конструктор условий
@@ -236,73 +238,29 @@ let appData = {
         incomePeriodValue.value = appData.calcPeriod();
         document.querySelector('.period-amount').textContent = event.target.value;
     },
-
-    blockStart: function() {
-        document
-            .querySelector('.start')
-            .addEventListener('click', function(event) {
-                if (salaryAmount.value !== '' && salaryAmount.value !== 0) {
-                    event.preventDefault();
-                }
-            });
-
-        /*   salaryAmount = document.querySelector('.salary-amount');
-salaryAmount = function() {
-if (salaryAmount.value !== '' && salaryAmount.value !== 0) {
-start.setAttribute('disabled', 'disabled', true);
-return;
-}
-
-}; */
-        // salaryAmount.forEach(function(item) {
-        //     item.setAttribute('disabled', 'true');
-        // });
-        // start.style.display = 'none';
-        /* start.style.display = 'block';
-incomePlus.removeAttribute('disabled');
-expensesPlus.removeAttribute('disabled'); */
-        //let disabled = document.createElement('disabled');
-        /*   let startBtn = document.getElementById('start');
-startBtn.disabled = true; */
-        /*function checkValidity() {
-//     let forms = document.querySelectorAll('data');
-let salaryAmount = document.querySelector('.salary-amount').value;
-if (salaryAmount !== 0) {
-startBtn.disabled = false;
-} else {
-startBtn.disabled = true;
-}
-} */
-        /*   let salaryAmount = document.querySelector('.salary-amount').value;
-if (salaryAmount.length === 0 && salaryAmount.length !== '') {
-document.getElementById('start').setAttribute('disabled', 'disabled');
-} */
-        /* else {
-document.getElementById('start').attribute('disabled','disabled');
-} */
-        /*   if (salaryAmount.value.length === 0) {
-start.removeAttribute('disabled', '');
-} */
-        // start.setAttribute('disabled', '');
-        // if (!salaryAmount) {
-        //     console.log('Введите месячный доход');
-        // } else {
-        //     salaryAmount.value.trim();
-        // }
-        //start.hidden
-        //disabled;
-        /* if (start.style.display !== isNumber) {
-start.style.display = 'none';
-alert('Ошибка, поле "Месячный доход" должен быть заполнен!');
-} */
-    },
 };
+
+//отключение клавиши с последующим навешиванием слушателя
+const enablingStart = function() {
+    if (
+        isNumber(salaryAmount.value) &&
+        salaryAmount.value !== '' &&
+        salaryAmount.value !== null
+    ) {
+        start.disabled = false;
+    } else {
+        start.disabled = true;
+    }
+};
+
+enablingStart();
+
+salaryAmount.addEventListener('input', enablingStart);
 
 start.addEventListener('click', appData.start);
 incomePlus.addEventListener('click', appData.addIncomeBlock);
 expensesPlus.addEventListener('click', appData.addExpensesBlock);
 periodSelect.addEventListener('input', appData.changePeriodSelect);
-salaryAmount.addEventListener('input', appData.blockStart);
 
 //Обьявить функцию getTargetMonth. Подсчитать за какой период будет достигнута цель, зная результат месячного накопления accumulatedMonth и возвращает результат.
 appData.targetMonth = appData.getTargetMonth(
