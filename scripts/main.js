@@ -70,6 +70,8 @@ let appData = {
     expensesMonth: 0,
     //проверка вхоящийх данных
     start: function() {
+        appData.blockStart();
+
         //при вызове input будет присваиваться месячный доход в наш бюджет
         appData.budget = +salaryAmount.value;
 
@@ -118,7 +120,7 @@ let appData = {
             let itemExpenses = item.querySelector('.expenses-title').value;
             let cashExpenses = item.querySelector('.expenses-amount').value;
             if (itemExpenses !== '' && cashExpenses !== '') {
-                appData.expenses[itemExpenses] = +cashExpenses;
+                appData.expenses[itemExpenses] = +cashExpenses; //+
             } //key = value
         });
     },
@@ -141,12 +143,12 @@ let appData = {
             let cashIncomes = item.querySelector('.income-amount').value;
 
             if (itemIncomes !== '' && cashIncomes !== '') {
-                appData.income[itemIncomes] = +cashIncomes;
+                appData.income[itemIncomes] = +cashIncomes; //+
             }
         });
         //с помощью циклов получаем дополнительный зароботок
         for (let key in appData.income) {
-            appData.incomeMonth += appData.income[key];
+            appData.incomeMonth += +appData.income[key];
         }
     },
     //метод расходов
@@ -178,7 +180,7 @@ let appData = {
     //Объявить ф-ю всех обязательных расходов
     getExpensesMonth: function() {
         for (let elem in appData.expenses) {
-            appData.expensesMonth += appData.expenses[elem];
+            appData.expensesMonth += +appData.expenses[elem];
             console.log('key: ' + elem + ' value: ' + appData.expenses[elem]);
         }
     },
@@ -231,13 +233,62 @@ let appData = {
     },
 
     changePeriodSelect: function(event) {
-        // let count = periodSelect.value;
         incomePeriodValue.value = appData.calcPeriod();
         document.querySelector('.period-amount').textContent = event.target.value;
     },
 
-    blockSart: function() {
-        start.disabled = !salaryAmount.value.trim();
+    blockStart: function() {
+        document
+            .querySelector('.start')
+            .addEventListener('click', function(event) {
+                if (salaryAmount.value !== '' && salaryAmount.value !== 0) {
+                    event.preventDefault();
+                }
+            });
+
+        /*   salaryAmount = document.querySelector('.salary-amount');
+salaryAmount = function() {
+if (salaryAmount.value !== '' && salaryAmount.value !== 0) {
+start.setAttribute('disabled', 'disabled', true);
+return;
+}
+
+}; */
+        // salaryAmount.forEach(function(item) {
+        //     item.setAttribute('disabled', 'true');
+        // });
+        // start.style.display = 'none';
+        /* start.style.display = 'block';
+incomePlus.removeAttribute('disabled');
+expensesPlus.removeAttribute('disabled'); */
+        //let disabled = document.createElement('disabled');
+        /*   let startBtn = document.getElementById('start');
+startBtn.disabled = true; */
+        /*function checkValidity() {
+//     let forms = document.querySelectorAll('data');
+let salaryAmount = document.querySelector('.salary-amount').value;
+if (salaryAmount !== 0) {
+startBtn.disabled = false;
+} else {
+startBtn.disabled = true;
+}
+} */
+        /*   let salaryAmount = document.querySelector('.salary-amount').value;
+if (salaryAmount.length === 0 && salaryAmount.length !== '') {
+document.getElementById('start').setAttribute('disabled', 'disabled');
+} */
+        /* else {
+document.getElementById('start').attribute('disabled','disabled');
+} */
+        /*   if (salaryAmount.value.length === 0) {
+start.removeAttribute('disabled', '');
+} */
+        // start.setAttribute('disabled', '');
+        // if (!salaryAmount) {
+        //     console.log('Введите месячный доход');
+        // } else {
+        //     salaryAmount.value.trim();
+        // }
         //start.hidden
         //disabled;
         /* if (start.style.display !== isNumber) {
@@ -251,7 +302,7 @@ start.addEventListener('click', appData.start);
 incomePlus.addEventListener('click', appData.addIncomeBlock);
 expensesPlus.addEventListener('click', appData.addExpensesBlock);
 periodSelect.addEventListener('input', appData.changePeriodSelect);
-salaryAmount.addEventListener('input', appData.blockSart);
+salaryAmount.addEventListener('input', appData.blockStart);
 
 //Обьявить функцию getTargetMonth. Подсчитать за какой период будет достигнута цель, зная результат месячного накопления accumulatedMonth и возвращает результат.
 appData.targetMonth = appData.getTargetMonth(
